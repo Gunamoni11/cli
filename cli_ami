@@ -9,4 +9,4 @@ node('master'){
         jsonitem = readJSON text: output
         println(jsonitem)
     }
-	}
+}
