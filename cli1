@@ -1,0 +1,9 @@
+node('master'){
+    stage('Launch configuration'){
+        def cmd = "aws autoscaling create-launch-configuration --launch-configuration-name mylc5 --image-id ami-01516a342d7abbaf4 --instance-type t2.micro --security-groups sg-0862e0d8235267a61 --key-name jenkins --user-data \$'" + userdata + "' --region us-east-2"
+        sh (cmd)
+    }
+    stage('Auto scaling'){
+        sh "aws autoscaling create-auto-scaling-group --auto-scaling-group-name myasg5 --launch-configuration-name mylc5 --max-size 2 --min-size 1 --availability-zones us-east-2c --region us-east-2"
+    }
+}
