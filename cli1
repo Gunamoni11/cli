@@ -1,6 +1,6 @@
 node('master'){
     stage('Launch configuration'){
-        def cmd = "aws autoscaling create-launch-configuration --launch-configuration-name mylc5 --image-id ami-01516a342d7abbaf4 --instance-type t2.micro --security-groups sg-0862e0d8235267a61 --key-name jenkins --user-data \$'" + userdata + "' --region us-east-2"
+        def cmd = "aws autoscaling create-launch-configuration --launch-configuration-name mylc5 --image-id ami-01516a342d7abbaf4 --instance-type t2.micro --security-groups sg-0862e0d8235267a61 --key-name jenkins --user-data \$'sudo apt-get update –y\nsudo apt-get upgrade –y\nsudo apt-get install apache2 -y' --region us-east-2"
         sh (cmd)
     }
     stage('Auto scaling'){
